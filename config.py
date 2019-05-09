@@ -12,7 +12,7 @@ import re
 # wangwei-实验室服务器: 2
 # wangwei-Windows: 3
 # zhuangxu: 4
-machine = 3
+machine = 2
 
 print("===================================================================================")
 # 根据上面的值进行三选一
@@ -35,8 +35,8 @@ elif machine ==1 :
 elif machine == 2:
     # 实验室服务器
     gpu_choice = '1'
-    os.environ['CUDA_VISIBLE_DEVICES']=gpu_choice
-    project_path = "/wangwei/Crisscrossing_Convolution/Code/"
+    # os.environ['CUDA_VISIBLE_DEVICES']=gpu_choice
+    project_path = "/wangwei/Sonic_Wave_Controller/"
     data_path = "/wangwei/variables/"
     use_GPU = True
     assert os.path.exists(project_path),"File path error, Check the config file !!!"

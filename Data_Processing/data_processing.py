@@ -3,9 +3,12 @@ import config
 import numpy as np
 import random
 from scipy.io import loadmat
-
+import os
 def get_data():
+    # check data file
+    assert os.path.exists(config.data_path + "sonic_data_2"),"Data file can not be found."
     # fetch raw data
+    print("fetch raw data ...")
     fields = []
     phases = []
     for i in range(191)[1:]:
@@ -15,17 +18,21 @@ def get_data():
         phases.append(loadmat(r""+config.data_path + "sonic_data_2/" + "height0.14_"+str(i)+"randphase.mat")['initial_phase']) # name_template: "height0.14_1randphase"
 
     # reshape into numpy
-    fields = np.array(fields)
+    print("reshape into numpy ...")
+    fields = np.array(fields)[...,np.newaxis] # expand dimension
     phases = np.array(phases)
 
     # norm field globally
+    print("norm fields globally ...")
     fields = fields - np.full(fields.shape,fields.min()) / (np.full(fields.shape,fields.max()) - (np.full(fields.shape,fields.min())))
 
     # norm phase separately
+    print("norm phase separately ...")
     for index_x in range(190):
         phases[index_x] = (phases[index_x] - np.full(phases[index_x].shape,phases[index_x].min())) / (np.full(phases[index_x].shape,phases[index_x].max()) - np.full(phases[index_x].shape,phases[index_x].min()))
 
     # split and shuffle
+    print("split and shuffle ...")
     state = np.random.get_state()
     np.random.shuffle(fields)
     np.random.set_state(state)

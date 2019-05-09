@@ -9,6 +9,13 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="sonic_wave_generator">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/Sonic_Wave_Controller" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
     </serverData>
   </component>
 </project>
